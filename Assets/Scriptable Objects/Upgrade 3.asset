@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeType: 1
   add: 0
-  price: 100
+  price: 8649.756
   gap: 0.1
+  maxLvl: 100
+  lvl: 12
+  isMaxLvl: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        moneyText.text = money>0? Utilities.FormatNumber(money)+" money" : "0 money";
+        moneyText.text = money>0.01? Utilities.FormatNumber(money)+" money" : "0 money";
         addText.text = add > 0 ? Utilities.FormatNumber(add)+" add" : "0 add";
         gapText.text = money > 0 ? gap.ToString("#.#")+" gap" : "0 gap";
     }
@@ -48,12 +49,23 @@ public class GameManager : MonoBehaviour
     }
     public void Upgrade(UpgradeSO upgrade)
     {
-        if (money >= upgrade.price)
+        if (money >= upgrade.price && !upgrade.isMaxLvl && upgrade.lvl < upgrade.maxLvl)
         {
             money -= upgrade.price;
             add += upgrade.add;
             gap -= upgrade.gap;
+            if (gap == 0)
+            {
+                upgrade.isMaxLvl = true;
+                gap = 0.1f;
+            }
+            upgrade.lvl++;
+            if (upgrade.lvl == upgrade.maxLvl)
+            {
+                upgrade.isMaxLvl = true;
+            }
             upgrade.price *= 1.5f;
+            
         }
     }
     IEnumerator GetMoney()

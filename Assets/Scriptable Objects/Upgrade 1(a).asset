@@ -16,3 +16,6 @@ MonoBehaviour:
   add: 0.1
   price: 1
   gap: 0
+  maxLvl: 10
+  lvl: 1
+  isMaxLvl: 0
